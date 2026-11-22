@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Generate README.md, README_zh.md and assets/layers.svg from data/ and templates/.
+"""Generate README.md, README_zh.md and Fig. 1 (assets/fig1_en.svg, assets/fig1_zh.svg) from data/ and templates/.
 
 Usage: python scripts/build_readme.py
 Edit data/entries.yaml (the list) or templates/*.md (the prose), never the generated READMEs.
 """
 import json, pathlib, re
 import yaml
+
+import figure
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 entries = yaml.safe_load((ROOT / "data/entries.yaml").read_text())
@@ -58,42 +60,6 @@ def table(section, lang):
     return "\n".join([head, sep] + [row(e, lang, short) for e in items])
 
 
-def layer_counts():
-    tools = [e for e in entries if e["section"] not in ("adjacent", "detection")]
-    c = {"L1": 0, "L2": 0, "L3": 0, "L4": 0}
-    s = {"L1": 0, "L2": 0, "L3": 0, "L4": 0}
-    for e in tools:
-        for L in e["layer"].replace("L2-3", "L2").split(","):
-            c[L] += 1
-            s[L] += STARS.get(e["repo"], 0)
-    return c, s
-
-
-def svg():
-    c, s = layer_counts()
-    rows = [
-        ("L1", "① Watermark · 水印", "#e7f1fb"),
-        ("L2", "② Wording &amp; syntax · 用词和句式", "#f9eeda"),
-        ("L3", "③ Structure &amp; argument · 结构和论证", "#e5f4e4"),
-        ("L4", "④ Token distribution · 词的概率分布", "#efedff"),
-    ]
-    maxs = max(s.values()) or 1
-    out = ['<svg xmlns="http://www.w3.org/2000/svg" width="760" height="300" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">',
-           '<rect width="760" height="300" fill="#ffffff"/>',
-           '<text x="20" y="30" font-size="16" font-weight="700" fill="#1a1a1a">Where de-AI tools work · 去AI味工具作用在哪一层</text>',
-           f'<text x="20" y="50" font-size="12" fill="#666">bar = total GitHub stars of listed tools in that layer · as of {AS_OF}</text>']
-    for i, (L, label, color) in enumerate(rows):
-        y = 70 + i * 55
-        w = 20 + 250 * s[L] / maxs
-        out.append(f'<rect x="20" y="{y}" width="320" height="44" rx="6" fill="{color}" stroke="#d0d0d0"/>')
-        out.append(f'<text x="32" y="{y+27}" font-size="14" fill="#1a1a1a">{label}</text>')
-        out.append(f'<rect x="350" y="{y+10}" width="{w:.0f}" height="24" rx="4" fill="#4a6fa5"/>')
-        out.append(f'<text x="{356+w:.0f}" y="{y+27}" font-size="13" fill="#1a1a1a">{c[L]} tools · {s[L]/1000:.0f}k ⭐</text>')
-    out.append("</svg>")
-    (ROOT / "assets").mkdir(exist_ok=True)
-    (ROOT / "assets/layers.svg").write_text("\n".join(out))
-
-
 def build(lang, out):
     text = (ROOT / f"templates/README.{lang}.md").read_text()
     text = re.sub(r"\{\{TABLE:(\w+)\}\}", lambda m: table(m.group(1), lang), text)
@@ -105,7 +71,7 @@ def build(lang, out):
 
 
 if __name__ == "__main__":
-    svg()
+    figure.build_all(ROOT, entries, STARS, AS_OF)
     build("en", "README.md")
     build("zh", "README_zh.md")
-    print("built README.md, README_zh.md, assets/layers.svg")
+    print("built README.md, README_zh.md, assets/fig1_en.svg, assets/fig1_zh.svg")

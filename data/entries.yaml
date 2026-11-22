@@ -6,6 +6,7 @@
 # timing:  post-hoc (rewrite after drafting) | generation (prevent while writing) | model (change the weights)
 # use:     academic | general | fiction | social | tech-doc
 # warn:    true = marketed for evading detectors; listed for completeness, not recommended
+# name:    optional display name in the README tables (defaults to the repo name)
 
 - repo: blader/humanizer
   section: wording
@@ -62,6 +63,7 @@
   zh: "提供改写、检测与原地编辑三种模式，并附确定性规则检测器（npm），给出 0–100 评分。"
 
 - repo: MrGeDiao/shuorenhua
+  name: 说人话
   section: wording
   layer: L2
   timing: post-hoc
@@ -374,3 +376,87 @@
   use: [fiction]
   en: "Novel-writing application that can import de-AI skills."
   zh: "AI 小说写作应用，可导入去 AI 味 Skill。"
+
+- repo: Imbad0202/academic-research-skills-codex
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Codex edition of academic-research-skills."
+  zh: "academic-research-skills 的 Codex 版本。"
+
+- repo: zLanqing/codex-claude-academic-skills
+  section: adjacent
+  langs: [zh, en]
+  use: [academic]
+  en: "Three skills for literature reading, paper writing and scientific computing."
+  zh: "文献阅读、论文写作与科学计算三个 Skill。"
+
+- repo: Norman-bury/research-writing-skill
+  section: adjacent
+  langs: [zh, en]
+  use: [academic]
+  en: "Research-writing assistant skill."
+  zh: "科研写作助手 Skill。"
+
+- repo: HughYau/AcademicForge
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Collection of academic writing and research skills."
+  zh: "学术写作与研究 Skill 合集。"
+
+- repo: aipoch/medical-research-skills
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Medical-research skill collection, including academic writing."
+  zh: "医学研究 Skill 合集，含学术写作。"
+
+- repo: delibae/claude-prism
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Offline research-writing workbench combining LaTeX, Python and 100+ research skills."
+  zh: "离线科研写作工作台：LaTeX + Python + 100 余个科研 Skill。"
+
+- repo: pedrohcgs/claude-code-my-workflow
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Claude Code template for academic research with multi-agent review."
+  zh: "面向学术研究的 Claude Code 模板，含多智能体审稿。"
+
+- repo: PaperDebugger/paperdebugger
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "In-editor multi-agent writing, reviewing and revision."
+  zh: "编辑器内的多智能体写作、审稿与修改。"
+
+- repo: lishix520/academic-paper-skills
+  section: adjacent
+  langs: [zh, en]
+  use: [academic]
+  en: "Paper-writing skills split into a strategist (planning) and a composer (drafting)."
+  zh: "论文写作 Skill：strategist 负责规划，composer 负责撰写。"
+
+- repo: brycewang-stanford/Awesome-Journal-Skills
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Style skills for 200+ journals, including Nature, Cell and AER."
+  zh: "Nature、Cell、AER 等 200 余种期刊的风格 Skill。"
+
+- repo: Spark-To-Paper-Skills/paperjury
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: "Pre-submission AI peer-review stress test."
+  zh: "投稿前的 AI 审稿压力测试。"
+
+- repo: LeonChaoX/qinyan-academic-skills
+  section: adjacent
+  langs: [zh]
+  use: [academic]
+  en: "Collection of 182 academic research skills."
+  zh: "182 个学术研究 Skill 合集。"

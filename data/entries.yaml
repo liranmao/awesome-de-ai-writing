@@ -1,0 +1,376 @@
+# Single source of truth for the list. README.md and README_zh.md are generated from this file
+# by scripts/build_readme.py; star counts live in data/stars.json (scripts/update_stars.py).
+#
+# layer:   L1 watermark | L2 wording | L2-3 data-calibrated | L3 structure | L4 distribution
+# section: which table the entry appears in (see SECTIONS in build_readme.py)
+# timing:  post-hoc (rewrite after drafting) | generation (prevent while writing) | model (change the weights)
+# use:     academic | general | fiction | social | tech-doc
+# warn:    true = marketed for evading detectors; listed for completeness, not recommended
+
+- repo: blader/humanizer
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: 26 patterns from Wikipedia's "Signs of AI writing"; keeps every fact; says outright that detectors still flag most of its output.
+  zh: 基于 Wikipedia「Signs of AI writing」的 26 种模式，保留全部事实；README 明说检测器仍会标出大多数输出。
+
+- repo: op7418/Humanizer-zh
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [zh]
+  use: [general]
+  en: Chinese adaptation of humanizer, rewritten 2026-09 to stop over-editing ordinary parallelism and dashes.
+  zh: humanizer 中文版；2026-09 重写规则，普通排比、破折号不再一律修改。
+
+- repo: hardikpandya/stop-slop
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: Hardest rules in the category (no adverbs, no passive voice, two items instead of three) plus a 5-axis self-score.
+  zh: 规则最硬（禁副词、禁被动、三项改两项），附 5 维自评分；用在论文上会误伤。
+
+- repo: petergyang/no-ai-slop
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: Lightweight list of 20+ slop patterns.
+  zh: 轻量清单，20+ 种 slop 模式。
+
+- repo: epoko77-ai/im-not-ai
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [ko]
+  use: [general]
+  en: Korean; translationese, mechanical parallelism and 70+ other tells.
+  zh: 韩语；翻译腔、机械排比等 70+ 种痕迹。
+
+- repo: conorbronsdon/avoid-ai-writing
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: Rewrite / detect / edit modes; ships a deterministic 0-100 pattern detector on npm.
+  zh: 改写/检测/原地编辑三模式；自带 npm 规则检测器，0–100 打分。
+
+- repo: MrGeDiao/shuorenhua
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [zh, en]
+  use: [general]
+  en: Most conservative editor; removes filler only and leaves promotional wording unless asked to "write it plain".
+  zh: 最保守：默认只删套话和提示语，宣传词要明确说「写平实点」才降调。
+
+- repo: ItsssssJack/SlopMonster
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general, social]
+  en: Lint for tells, rewrite with a rival model, lint again.
+  zh: 先 lint，再换一个模型清洗，再 lint。
+
+- repo: hylarucoder/ai-flavor-remover
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [zh]
+  use: [general]
+  en: Chinese prompt-style remover; author tested it on Gemini 2.5 Pro only.
+  zh: 中文 AI 味去除；作者注明只在 Gemini 2.5 Pro 上测过。
+
+- repo: Raymondhou0917/speak-human-tw
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [zh-Hant]
+  use: [general]
+  en: Traditional Chinese; 38 tells plus regional wording and punctuation fixes.
+  zh: 繁体中文；38 种痕迹，顺带校正用语与半形标点。
+
+- repo: textlint-ja/textlint-rule-preset-ai-writing
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [ja]
+  use: [general, tech-doc]
+  en: Japanese textlint preset; flags AI-style phrasing with a linter instead of an LLM.
+  zh: 日语 textlint 规则集，用 lint 而非 LLM 标出 AI 腔。
+
+- repo: theclaymethod/unslop
+  section: wording
+  layer: L2
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: Agent skill to de-AI prose.
+  zh: 通用 de-AI 写作 Skill。
+
+- repo: larashero3-dotcom/lieflat-less-ai-tone
+  section: calibrated
+  layer: L2-3
+  timing: post-hoc
+  langs: [zh]
+  use: [general]
+  en: Picks what to fix from a corpus study (1,169 texts, ~5.2M characters, 100+ metrics); reports first, then rewrites and re-measures.
+  zh: 先用语料研究（1,169 篇、约 520 万字、100+ 指标）决定改什么；先出报告，再改写复测。
+
+- repo: Nanako0129/sepia
+  section: structure
+  layer: L3
+  timing: post-hoc
+  langs: [en, zh]
+  use: [fiction, tech-doc]
+  en: Repairs narrative architecture before word choice, citing StoryScope; venue-specific rules for professional documents.
+  zh: 先修叙事结构再动用词（引 StoryScope 研究）；专业文档按场景分规则。
+
+- repo: KKKKhazix/human-writing
+  section: structure
+  layer: L3
+  timing: generation
+  langs: [zh]
+  use: [general, social]
+  en: Inventories material before writing, asks rather than inventing, and requires every paragraph to add something new.
+  zh: 动笔前先清点材料，缺了就问不编；每段必须带来新信息。
+
+- repo: AIScientists-Dev/academic-humanizer
+  section: structure
+  layer: L3
+  timing: post-hoc
+  langs: [en]
+  use: [academic]
+  en: Papers and NSF/NIH proposals; checks that every claim has its number or citation and that no verb outruns the evidence. Covered by Nature news (2026-07).
+  zh: 面向论文和 NSF/NIH 基金；检查每个主张是否有数字/引用、动词是否强于证据。2026-07 Nature 新闻报道。
+
+- repo: Adkid-Zephyr/anti-defensive-writing-Skill
+  section: structure
+  layer: L3
+  timing: post-hoc
+  langs: [zh, en]
+  use: [academic]
+  en: Reframes a paper as a "press conference"; this changes narrative strategy rather than AI tells, and its rules favor dropping unfavorable results.
+  zh: 把论文当「发布会」；改的是叙事策略而非 AI 痕迹，规则倾向删掉不利结果。
+
+- repo: Kiterlin/anti-defensive-writing
+  section: structure
+  layer: L3
+  timing: post-hoc
+  langs: [en]
+  use: [academic]
+  en: Codex skill on the same anti-defensive-writing idea.
+  zh: 同主题的 Codex Skill。
+
+- repo: hexiecs/talk-normal
+  section: upstream
+  layer: L2
+  timing: generation
+  langs: [en]
+  use: [general]
+  en: A system prompt that keeps a model from writing slop in the first place.
+  zh: 一段系统提示词，让模型一开始就不写成 AI 腔。
+
+- repo: p-e-w/heretic
+  section: upstream
+  layer: L2
+  timing: model
+  langs: [any]
+  use: [general]
+  en: Training-free weight modification that suppresses slop and sycophancy in open models; changes the generator, not the text.
+  zh: 免训练修改开源模型权重，抑制 slop 与讨好倾向；改的是模型而不是文本。
+
+- repo: larashero3-dotcom/writing-dna-skill
+  section: upstream
+  layer: L3
+  timing: generation
+  langs: [zh]
+  use: [general]
+  en: Distills a writer's style into a reusable skill (voice imitation).
+  zh: 把任意作者的文风蒸馏成可复用 Skill（风格模仿）。
+
+- repo: AhmadHassan-BTed/Turnitout-Humanizer
+  section: evasion
+  layer: L4
+  timing: post-hoc
+  langs: [en]
+  use: [academic]
+  warn: true
+  en: Claims programmatic evasion of Turnitin, iThenticate and GPTZero ("similarity evader"); claims unverified.
+  zh: 宣称程序化绕过 Turnitin、iThenticate、GPTZero；未经验证。
+
+- repo: lynote-ai/humanize-text
+  section: evasion
+  layer: L4
+  timing: post-hoc
+  langs: [en]
+  use: [general]
+  en: LLM rewriting plus multi-engine round-trip translation.
+  zh: LLM 改写 + 多引擎回译。
+
+- repo: iniwap/AIWriteX
+  section: evasion
+  layer: L4
+  timing: post-hoc
+  langs: [zh]
+  use: [social]
+  warn: true
+  en: Automated WeChat article pipeline that advertises passing Tencent Zhuque detection.
+  zh: 公众号全自动写作，宣称「过朱雀检测」。
+
+- repo: chi111i/BypassAIGC
+  section: evasion
+  layer: L4
+  timing: post-hoc
+  langs: [zh]
+  use: [academic]
+  warn: true
+  en: Thesis polishing app sold as lowering AIGC scores, shown against GPTZero.
+  zh: 论文润色 + 降 AIGC 率，以 GPTZero 前后对比为卖点。
+
+- repo: google-deepmind/synthid-text
+  section: watermark
+  layer: L1
+  langs: [any]
+  en: Reference implementation of SynthID-Text (Dathathri et al., Nature 2024).
+  zh: SynthID-Text 官方实现（Nature 2024）。
+
+- repo: THU-BPM/MarkLLM
+  section: watermark
+  layer: L1
+  langs: [any]
+  en: Open toolkit of LLM watermarking algorithms (EMNLP 2024 demo).
+  zh: 清华 LLM 水印工具包（EMNLP 2024 Demo）。
+
+- repo: jwkirchenbauer/lm-watermarking
+  section: watermark
+  layer: L1
+  langs: [any]
+  research: true
+  en: Code for "A Watermark for Large Language Models" (Kirchenbauer et al., ICML 2023).
+  zh: 经典 green-list 水印论文代码（ICML 2023）。
+
+- repo: aloshdenny/reverse-SynthID
+  section: watermark
+  layer: L1
+  langs: [any]
+  en: Reverse-engineering of Gemini's SynthID detection.
+  zh: 逆向 Gemini 的 SynthID 检测。
+
+- repo: wiltodelta/remove-ai-watermarks
+  section: watermark
+  layer: L1
+  langs: [any]
+  en: Removes watermarks and provenance metadata from images, video and audio (not text).
+  zh: 去除图像、视频、音频的 AI 水印和来源元数据（不含文本）。
+
+- repo: Hello-SimpleAI/chatgpt-comparison-detection
+  section: detection
+  layer: L4
+  langs: [en, zh]
+  en: HC3 human-vs-ChatGPT corpus and RoBERTa detectors, trained on 2023 ChatGPT answers.
+  zh: HC3 人类/ChatGPT 对比语料与 RoBERTa 检测器，基于 2023 年 ChatGPT 回答训练。
+
+- repo: openai/gpt-2-output-dataset
+  section: detection
+  layer: L4
+  langs: [en]
+  en: GPT-2 outputs released by OpenAI for detection research.
+  zh: OpenAI 发布的 GPT-2 输出数据集，用于检测研究。
+
+- repo: HendrikStrobelt/detecting-fake-text
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: GLTR, the visual token-rank tool that started perplexity-style detection.
+  zh: GLTR，可视化每个词的排名，困惑度检测的起点。
+
+- repo: eric-mitchell/detect-gpt
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: DetectGPT, zero-shot detection via probability curvature (ICML 2023).
+  zh: DetectGPT，基于概率曲率的零样本检测（ICML 2023）。
+
+- repo: baoguangsheng/fast-detect-gpt
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: Fast-DetectGPT, conditional probability curvature (ICLR 2024).
+  zh: Fast-DetectGPT（ICLR 2024）。
+
+- repo: ahans30/Binoculars
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: Binoculars, zero-shot detection from two models' perplexity ratio (ICML 2024).
+  zh: Binoculars，用两个模型的困惑度比做零样本检测（ICML 2024）。
+
+- repo: vivek3141/ghostbuster
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: Ghostbuster (NAACL 2024).
+  zh: Ghostbuster（NAACL 2024）。
+
+- repo: liamdugan/raid
+  section: detection
+  layer: L4
+  langs: [en]
+  research: true
+  en: RAID, the largest detection benchmark, including adversarial attacks (ACL 2024).
+  zh: RAID，最大的检测基准，含对抗攻击（ACL 2024）。
+
+- repo: binary-husky/gpt_academic
+  section: adjacent
+  langs: [zh, en]
+  use: [academic]
+  en: Long-running academic polishing, translation and writing UI.
+  zh: 老牌学术润色/翻译/写作界面。
+
+- repo: Imbad0202/academic-research-skills
+  section: adjacent
+  langs: [en]
+  use: [academic]
+  en: Research, write, review, revise and finalize skill suite for Claude Code.
+  zh: research → write → review → revise → finalize 全流程 Skill。
+
+- repo: Master-cai/Research-Paper-Writing-Skills
+  section: adjacent
+  langs: [zh, en]
+  use: [academic]
+  en: ML/CV/NLP paper-writing skills adapted from Prof. Sida Peng's notes.
+  zh: 改编自彭思达老师公开笔记的 ML/CV/NLP 写作 Skill。
+
+- repo: Fenng/Tech-Doc-Style-Chinese
+  section: adjacent
+  langs: [zh]
+  use: [tech-doc]
+  en: Chinese technical-documentation style skill.
+  zh: 中文技术文档与产品文案写作 Skill。
+
+- repo: zenstory-ai/oh-story-claudecode
+  section: adjacent
+  langs: [zh]
+  use: [fiction]
+  en: Web-novel skill suite with a de-AI step.
+  zh: 网文全流程 Skill 包，含去 AI 味一步。
+
+- repo: EthanYoQ/Pagekin
+  section: adjacent
+  langs: [zh]
+  use: [fiction]
+  en: Novel-writing app that can import de-AI skills.
+  zh: AI 小说写作软件，可导入去 AI 味 Skill。

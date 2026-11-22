@@ -1,0 +1,107 @@
+# Row definitions for the two README tables. Repo lists (with live star counts) are filled in
+# automatically from data/entries.yaml by scripts/build_readme.py; only the prose lives here.
+
+# Table 1: by mechanism. `sections` selects entries; `static` replaces the repo list.
+layers:
+  - id: L1
+    sections: []
+    en:
+      layer: "① Watermark"
+      principle: "A statistical signal embedded at sampling and detected by the provider with a key"
+      static: "None for text. All watermark-removal tools ≥1k ⭐ target images, video or audio"
+      approach: "Extensive paraphrasing already removes text watermarks, so no dedicated tool exists"
+      detectors: "—"
+    zh:
+      layer: "① 水印"
+      principle: "生成时在采样中嵌入统计信号，由厂商凭密钥检测"
+      static: "文本类暂无；≥1k⭐ 的去水印工具均针对图像、视频或音频"
+      approach: "大幅改写本身即可消除文本水印，因而没有专门工具"
+      detectors: "—"
+  - id: L2
+    sections: [wording]
+    en:
+      layer: "② Wording and syntax"
+      principle: "Check vocabulary, punctuation and sentence patterns against a list of AI markers, then rewrite"
+      approach: "Differ mainly in the source of the list: humanizer derives from Wikipedia's editors; stop-slop applies the strictest rules (no adverbs, no passive voice); 说人话 is the most conservative; avoid-ai-writing and textlint turn the list into a scoring linter; SlopMonster rewrites with a second model"
+      detectors: "No. Rule-based scores fall to zero, but commercial detectors still flag the output"
+    zh:
+      layer: "② 用词与句式（规则清单）"
+      principle: "按「AI 痕迹清单」检查用词、标点与句式，再行改写"
+      approach: "差异主要在清单来源：humanizer 系源自 Wikipedia 编辑的总结；stop-slop 规则最严（禁副词、禁被动）；说人话最保守；avoid-ai-writing 与 textlint 将清单做成可打分的检测器；SlopMonster 换用另一模型改写"
+      detectors: "否。规则检测分可降至零，商业检测器仍判为 AI"
+  - id: L2-3
+    sections: [calibrated]
+    en:
+      layer: "②→③ Corpus-calibrated"
+      principle: "Measure on a corpus which features actually affect reading, then decide what to edit"
+      approach: "5.2 million characters and 100+ metrics; produces a diagnostic report before rewriting and re-measuring, including model-judged semantic habits"
+      detectors: "Not claimed"
+    zh:
+      layer: "②→③ 语料校准"
+      principle: "先以语料统计哪些特征真正影响阅读，再决定改什么"
+      approach: "约 520 万字语料、100 余项指标；先出诊断报告，再改写并复测，涵盖由模型判断的语义层习惯"
+      detectors: "未宣称"
+  - id: L3
+    sections: [structure]
+    en:
+      layer: "③ Structure and argument"
+      principle: "Edit paragraph templates, argument order and narrative architecture, or require every sentence to rest on material and evidence"
+      approach: "sepia repairs narrative architecture before word choice; human-writing inventories material first and requires each paragraph to advance; academic-humanizer checks that claims match evidence; anti-defensive-writing changes narrative strategy rather than AI markers and may remove unfavourable results"
+      detectors: "No, or untested; the rewriter is still an LLM"
+    zh:
+      layer: "③ 结构与论证"
+      principle: "修改段落套路、论证顺序与叙事架构，或要求每句话都有素材和证据支撑"
+      approach: "sepia 先修叙事架构再动用词；human-writing 先清点素材、要求每段推进；academic-humanizer 检查主张与证据是否匹配；anti-defensive-writing 改的是叙事策略而非 AI 痕迹，可能删除不利结果"
+      detectors: "否或未测；改写者仍是 LLM"
+  - id: L4
+    sections: [evasion]
+    warn: true
+    en:
+      layer: "④ Token distribution ⚠️"
+      principle: "Make text less predictable: round-trip translation, programmatic substitution, rewriting against a detector"
+      approach: "humanize-text uses multi-engine round-trip translation; the others are marketed as passing GPTZero, Tencent Zhuque or Turnitin"
+      detectors: "Claimed, unverified. The DAMAGE study found that all 19 humanizers it audited degraded text quality; use in submitted work may breach academic-integrity rules"
+    zh:
+      layer: "④ 词元概率分布（降 AIGC）⚠️"
+      principle: "让文本变得「不好猜」：回译、程序化替换、对照检测器反复改写"
+      approach: "humanize-text 采用多引擎回译；其余均以通过 GPTZero、腾讯朱雀或 Turnitin 为卖点"
+      detectors: "宣称可以，未经验证。DAMAGE 研究审查的 19 个 humanizer 均降低了文本质量；用于提交的论文可能违反学术诚信规定"
+  - id: upstream
+    sections: [upstream]
+    en:
+      layer: "Upstream (prevent rather than fix)"
+      principle: "Act before or during generation instead of rewriting afterwards"
+      approach: "talk-normal is a system prompt; heretic modifies open-model weights to suppress slop and sycophancy; writing-dna distils a personal style to imitate"
+      detectors: "Not claimed"
+    zh:
+      layer: "源头预防"
+      principle: "在生成之前或生成过程中介入，而非事后改写"
+      approach: "talk-normal 是一段系统提示词；heretic 修改开源模型权重以抑制 slop 与讨好倾向；writing-dna 蒸馏个人文风供模仿"
+      detectors: "未宣称"
+
+# Table 2: by purpose. `filter` is interpreted in build_readme.py.
+purposes:
+  - id: academic
+    en: {purpose: "Manuscripts and grant proposals", advice: "academic-humanizer preserves every number and citation and flags claims that outrun the evidence. Avoid stop-slop on scientific text (it bans the passive voice), and check anti-defensive-writing output for deleted negative results"}
+    zh: {purpose: "科研论文与基金申请书", advice: "academic-humanizer 保留全部数字与引用，并标出超出证据的主张。科研文本不宜用 stop-slop（禁用被动语态）；使用 anti-defensive-writing 后须核对是否删去了不利结果"}
+  - id: general-en
+    en: {purpose: "General English prose", advice: "humanizer for a full pass; no-ai-slop for a light one; avoid-ai-writing when a before-and-after score is wanted"}
+    zh: {purpose: "通用英文写作", advice: "全面修改用 humanizer；轻度修改用 no-ai-slop；需要前后对比打分时用 avoid-ai-writing"}
+  - id: general-zh
+    en: {purpose: "Simplified Chinese", advice: "Humanizer-zh for a full pass; 说人话 for minimal edits; lieflat-less-ai-tone when a diagnostic report is wanted first"}
+    zh: {purpose: "简体中文写作", advice: "全面修改用 Humanizer-zh；轻改用说人话；想先看诊断报告用 lieflat-less-ai-tone"}
+  - id: other-lang
+    en: {purpose: "Traditional Chinese, Japanese, Korean", advice: "Language-specific marker lists; textlint runs as a deterministic linter without an LLM"}
+    zh: {purpose: "繁体中文、日语、韩语", advice: "各语言专属痕迹清单；textlint 以确定性 lint 运行，无需 LLM"}
+  - id: fiction
+    en: {purpose: "Fiction and narrative", advice: "sepia repairs narrative structure, which structure-level detectors such as StoryScope read"}
+    zh: {purpose: "小说与叙事", advice: "sepia 修复叙事结构，而 StoryScope 等结构级检测器读取的正是这一层"}
+  - id: social
+    en: {purpose: "Social media and newsletters", advice: "human-writing asks for missing material instead of inventing it; SlopMonster cross-checks with a second model"}
+    zh: {purpose: "社交媒体与公众号", advice: "human-writing 缺素材时询问而不编造；SlopMonster 用第二个模型交叉清洗"}
+  - id: tech-doc
+    en: {purpose: "Technical documentation", advice: "Use a style skill for the document type; de-AI rules apply on top"}
+    zh: {purpose: "技术文档", advice: "先用对应文体的写作 Skill，再叠加去 AI 味规则"}
+  - id: evasion
+    en: {purpose: "Lowering AIGC scores ⚠️", advice: "Listed for completeness, not recommended. Claims are unverified and such rewriting degrades quality; disclose AI use as your venue requires"}
+    zh: {purpose: "降 AIGC 率 ⚠️", advice: "出于完整性列出，不予推荐。效果未经验证，且此类改写会降低文本质量；请按投稿方要求披露 AI 使用"}

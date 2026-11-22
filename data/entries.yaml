@@ -6,6 +6,7 @@
 # timing:  post-hoc (rewrite after drafting) | generation (prevent while writing) | model (change the weights)
 # use:     academic | general | fiction | social | tech-doc
 # warn:    true = marketed for evading detectors; listed for completeness, not recommended
+# name:    optional display name in the README tables (defaults to the repo name)
 
 - repo: blader/humanizer
   section: wording
@@ -62,6 +63,7 @@
   zh: "提供改写、检测与原地编辑三种模式，并附确定性规则检测器（npm），给出 0–100 评分。"
 
 - repo: MrGeDiao/shuorenhua
+  name: 说人话
   section: wording
   layer: L2
   timing: post-hoc

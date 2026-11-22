@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Fig. 1 of the README: a journal-style, two-panel schematic rendered as plain SVG.
+"""Fig. 1 of the README: a journal-style schematic rendered as plain SVG.
 
-a  Where de-AI interventions act and who examines each layer (arrow width = number of listed tools).
-b  Listed tools per layer, split by timing, with total GitHub stars.
+Where de-AI interventions act and who examines each layer (curve width = number of listed tools).
 
 Called by scripts/build_readme.py; writes assets/fig1_en.svg and assets/fig1_zh.svg.
-Counts in panels a and b come from data/entries.yaml and data/stars.json.
+Counts come from data/entries.yaml and data/stars.json.
 """
 import json
 from html import escape
@@ -134,12 +133,11 @@ def tool_layers(e):
 def make(lang, entries, stars, scores, as_of):
     t = T[lang]
     tools = [e for e in entries if e["section"] not in ("adjacent", "detection")]
-    W, H = 1200, 780
+    W, H = 1200, 430
     s = Svg(W, H)
 
     # ---------------- panel a ----------------
-    s.text(20, 34, "a", size=20, weight="bold")
-    s.text(44, 34, t["a"], size=15, weight="bold")
+    s.text(20, 34, t["a"], size=15, weight="bold")
     LX, LW = 30, 220          # intervention column
     MX, MW = 400, 400         # layer stack
     RX, RW = 900, 280         # examiner column
@@ -197,51 +195,6 @@ def make(lang, entries, stars, scores, as_of):
     y2, y4 = row_y["L2"] + rh / 2, row_y["L4"] + rh / 2
     s.path(f"M{bx - 10},{y2} L{bx},{y2} L{bx},{y4} L{bx - 10},{y4}", stroke=ACCENT, sw=1.6)
     s.text(MX + MW / 2, top + 4 * (rh + gap) + 14, t["mismatch"], size=11.5, fill=ACCENT, weight="bold", anchor="middle")
-    # panel separator
-    s.line(20, 438, W - 20, 438, stroke=RULE)
-
-    # ---------------- panel b ----------------
-    by0 = 470
-    s.text(20, by0, "b", size=20, weight="bold")
-    s.text(44, by0, t["b"], size=15, weight="bold")
-    tkeys = ["post-hoc", "generation", "model", "none"]
-    counts = {L: {tm: 0 for tm in tkeys} for L in order}
-    star_sum = {L: 0 for L in order}
-    for e in tools:
-        for L in tool_layers(e):
-            counts[L][e.get("timing") or "none"] += 1
-            star_sum[L] += stars.get(e["repo"], 0)
-    maxn = max(sum(v.values()) for v in counts.values()) or 1
-    px0, pw = 260, 700
-    unit = pw / maxn
-    for i, L in enumerate(order):
-        y = by0 + 34 + i * 54
-        s.text(px0 - 10, y + 17, t["layers"][L][0], size=12.5, anchor="end", fill=LAYER_COL[L], weight="bold")
-        x = px0
-        for tm in tkeys:
-            c = counts[L][tm]
-            if c:
-                s.rect(x, y, c * unit, 24, fill=TIMING_COL[tm], stroke=GREY if tm == "none" else "#ffffff", sw=0.8)
-                x += c * unit
-        tot = sum(counts[L].values())
-        s.text(x + 8, y + 17, f"{tot}", size=12, weight="bold")
-        s.text(x + 30, y + 17, f'{t["stars"]} {star_sum[L] / 1000:.0f}k', size=11, fill=GREY)
-    # axis
-    ay = by0 + 34 + 4 * 54 - 10
-    s.line(px0, ay, px0 + pw, ay, stroke=INK, sw=0.8)
-    step = 5 if maxn > 10 else 2
-    for v in range(0, maxn + 1, step):
-        s.line(px0 + v * unit, ay, px0 + v * unit, ay + 4, stroke=INK, sw=0.8)
-        s.text(px0 + v * unit, ay + 16, str(v), size=10.5, anchor="middle", fill=GREY)
-    s.text(px0 + pw / 2, ay + 32, t["b_x"], size=11, anchor="middle", fill=GREY)
-    # legend
-    lx = 40
-    for tm in tkeys:
-        s.rect(lx, ay + 44, 11, 11, fill=TIMING_COL[tm], stroke=GREY if tm == "none" else "none", sw=0.8)
-        s.text(lx + 16, ay + 54, t["timing_short"][tm], size=11, fill=GREY)
-        lx += (len(t["timing_short"][tm]) * 6.2 + 34) if lang == "en" else (len(t["timing_short"][tm]) * 11 + 30)
-    s.text(px0 + pw + 80, by0, f'{t["stars_note"]}, {as_of}', size=10, fill=GREY, anchor="end")
-
     return s.render()
 
 

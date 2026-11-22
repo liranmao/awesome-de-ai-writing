@@ -1,6 +1,6 @@
 # Awesome De-AI Writing
 
-***A mechanism-based survey of tools, detectors and research for reducing the machine signature of AI-assisted text.***
+***This repository collects {{SKILLS}} de-AI writing skills with more than 1,000 GitHub stars.***
 
 [中文版](README_zh.md) · {{COUNT}} entries · star counts as of {{ASOF}}, refreshed weekly
 

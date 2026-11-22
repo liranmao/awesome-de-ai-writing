@@ -1,6 +1,6 @@
 # Awesome De-AI Writing｜去 AI 味工具综述
 
-***基于作用机制的综述：降低 AI 辅助文本机器痕迹的工具、检测器与相关研究***
+***本 GitHub repo 包含了 {{SKILLS}} 个 >1000 star 的去 AI 味 Skill。***
 
 [English](README.md) · 共收录 {{COUNT}} 项 · 星数截至 {{ASOF}}，每周自动更新
 

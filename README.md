@@ -15,12 +15,6 @@
 | Fiction and narrative | [sepia](https://github.com/Nanako0129/sepia) | — |
 | Prevent rather than fix | [talk-normal](https://github.com/hexiecs/talk-normal) (a system prompt) | — |
 
-Four rules before you start:
-
-1. **Know what you want.** These tools make text easier to read; they rarely change what GPTZero, Turnitin or CNKI report (see Fig. 1).
-2. **Give a writing sample if you have one.** humanizer, academic-humanizer and writing-dna-skill can match your own prior writing.
-3. **Check everything afterwards:** numbers, quotations, hedges ("may", "suggest"), and whether unfavorable results survived.
-4. **Disclose AI use as your venue requires**, regardless of any detector score.
 
 
 <p align="center"><img src="assets/fig1_en.svg" alt="Fig. 1: where de-AI tools act and who examines each layer" width="100%"></p>

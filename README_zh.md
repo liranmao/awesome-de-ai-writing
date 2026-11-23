@@ -16,13 +16,6 @@
 | 小说、叙事 | [sepia](https://github.com/Nanako0129/sepia) | — |
 | 想从源头避免 | [talk-normal](https://github.com/hexiecs/talk-normal)（一段系统提示词） | — |
 
-用之前记住四件事：
-
-1. **先想清楚目的。** 这些工具能让读者读得舒服，但基本过不了 GPTZero、知网这类检测器，原因见图 1。
-2. **有旧文先喂样本。** humanizer、academic-humanizer、writing-dna-skill 都支持参考你自己的文章，改出来更像你。
-3. **改完逐条核对。** 数字、引文原文、限定词（「可能」「suggest」）、不利结果，有没有被改动或删掉。
-4. **按投稿方要求披露 AI 使用**，与检测结果无关。
-
 
 
 <p align="center"><img src="assets/fig1_zh.svg" alt="图 1：去 AI 味工具作用于哪一层，以及各层由谁识别" width="100%"></p>
